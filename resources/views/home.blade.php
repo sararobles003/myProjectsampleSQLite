@@ -69,6 +69,10 @@
               <ul class="nav nav-tabs">
                 <li class="nav-item"><a href="" class="active nav-link">Account</a></li>
               </ul>
+              <form method="POST" action="{{ route('password.update') }}">
+                        @csrf
+                        <input type="hidden" name="token" value="{{ $token ?? '' }}">
+
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
                   <form class="form" novalidate="">
@@ -92,6 +96,9 @@
                         </div>
                       </div>
                     </div>
+                    <form method="POST" action="{{ route('password.update') }}">
+                        @csrf
+                        <input type="hidden" name="token" value="{{ $token ?? '' }}">
                     <div class="row">
                       <div class="col-12 col-sm-6 mb-3">
                         <div class="mb-2"><b>Change Password</b></div>
@@ -131,44 +138,44 @@
                         </div>
                       </div>
 
-            
-                      <div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                      <form id="userpreferences" method="POST" >
 
+                      <div class="col-12 col-sm-5 offset-sm-1 mb-3">
                         <div class="row">
                           <div class="col">
-                            <label>Communication Preference(s)</label>
+                            <label for="communication">Communication Preference(s)</label>
                             <div class="custom-controls-stacked px-2">
                               <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="yes2email" checked="">
+                                <input type="checkbox" class="custom-control-input" id="yes2email" checked="" value="byEmail">
                                 <label class="custom-control-label" for="yes2email"> Email</label>
                               </div>
                               <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="yes2text" checked="">
+                                <input type="checkbox" class="custom-control-input" id="yes2text" checked="" value="byText">
                                 <label class="custom-control-label" for="yes2text"> Text</label>
                               </div>
                               <label> </label>
                             </div>
-                            <label>Weekend Availability</label>
+                            <label for="availability">Weekend Availability</label>
                             <div class="custom-controls-stacked px-2">
 
                               <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="yes2Saturday" checked="">
+                                <input type="checkbox" class="custom-control-input" id="yes2Saturday" checked="" value="onSaturdays">
                                 <label class="custom-control-label" for="yes2Saturday"> Saturday</label>
                               </div>
                               <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="yes2Sunday" checked="">
+                                <input type="checkbox" class="custom-control-input" id="yes2Sunday" checked="" value="onSundays">
                                 <label class="custom-control-label" for="yes2Sunday"> Sunday</label>
                               </div>
                               <label> </label>
                             </div>
-                            <label>Volunteer for the:</label>
+                            <label for="volunteer">Volunteer for the:</label>
                             <div class="custom-controls-stacked px-2">
                               <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="yes2Events" checked="">
+                                <input type="checkbox" class="custom-control-input" id="yes2Events" checked="" value="forEvents">
                                 <label class="custom-control-label" for="yes2Events"> Events(front-end)</label>
                               </div>
                               <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="yes2Organization" checked="">
+                                <input type="checkbox" class="custom-control-input" id="yes2Organization" checked="" value="forOrganization">
                                 <label class="custom-control-label" for="yes2Organization"> Organization(back-end)</label>
                               </div>
                               <label> </label>
@@ -178,53 +185,25 @@
                       </div>
                     </div>
                     <div class="row">
+
                       <div class="col d-flex justify-content-end">
-
-
-
-                      <form id="register-form" action="{{ route('register') }}" method="POST" style="display: none;">
-                      @csrf
+                      
                         <button class="btn btn-primary" type="submit" value="Register" 
                        
-                        
-                href="{{ route('register') }}"
-               onclick="event.preventDefault(); alert('Changes saved. Thank you!')
-               document.getElementById('register-form').submit();
-               "> Save Changes
+                       
+                href="{{ route('password.update') }}"
+                onclick="event.preventDefault(); alert('Changes saved. Thank you!')"
+               > Save Changes
                
-               </form>
+
 
                </button>
-
-               <form method="POST" action="{{ route('register') }}">
-                 @csrf
-                  <input type="hidden" name="token" value="{{ $token ?? '' }}"> 
-                    <div class="form-group row mb-0">
-                    <form method="POST" action="{{ route('password.update') }}" >
-                       <div class="col-md-6 offset-md-4">
-                         <button type="submit" class="btn btn-primary"  
-                         
-
-                        href="{{ route('register') }}"
-                         onclick="event.preventDefault(); alert('Changes saved. Thank you!')
-                         document.getElementById('register-form').submit();" >
-                            {{ __('Register') }} <span> Changes</span>
-                          </button>
-
-                               @error('password')
-                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                 </span>
-                                @enderror
-                         </div>
-                         </form>
-                    </div>
-                </form>
-
+                    
                       </div>
                     </div>
                   </form>
-
+                  </form>
+                  </form>
                 </div>
               </div>
             </div>
@@ -246,8 +225,6 @@
                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
                  </form>
-
-
               </form>
             </div>
           </div>
